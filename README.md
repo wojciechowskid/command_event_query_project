@@ -124,7 +124,7 @@ command_event_query_project/
 ```
 
 ## Example: Command + Event Flow
-```
+```python
 # Command
 command = CreateUserCommand(username="Jane", email="jane@example.com")
 user_id = command_bus.handle(command)
@@ -134,7 +134,7 @@ user_id = command_bus.handle(command)
 ```
 
 ## Example: Query
-```
+```python
 query = GetUserQuery(user_id=42)
 user_dto = query_bus.handle(query)
 
@@ -145,14 +145,24 @@ print(user_dto.email)
 ## Handler Registration
 * Static maps in `handler_registry.py`
 * Dynamic registration in `apps.py` using `AppConfig.ready()`
-```
+```python
 # handler_registry.py
-COMMAND_HANDLERS = {CreateUserCommand: CreateUserHandler()}
-QUERY_HANDLERS = {GetUserQuery: get_user_handler}
-EVENT_HANDLERS = {UserCreatedEvent: [log_user_created, SendWelcomeEmailHandler()]}
+COMMAND_HANDLERS = {
+    CreateUserCommand: CreateUserHandler()
+}
+
+QUERY_HANDLERS = {
+    GetUserQuery: get_user_handler
+}
+EVENT_HANDLERS = {
+    UserCreatedEvent: [
+        log_user_created,
+        SendWelcomeEmailHandler()
+    ],
+}
 ```
 
-```
+```python
 # apps.py
 for cmd, handler in COMMAND_HANDLERS.items():
     command_bus.register_handler(cmd, handler)
@@ -171,7 +181,7 @@ for evt, handlers in EVENT_HANDLERS.items():
 
 
 ## Run the project
-```
+```bash
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt

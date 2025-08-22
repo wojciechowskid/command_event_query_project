@@ -154,6 +154,7 @@ COMMAND_HANDLERS = {
 QUERY_HANDLERS = {
     GetUserQuery: get_user_handler
 }
+
 EVENT_HANDLERS = {
     UserCreatedEvent: [
         log_user_created,

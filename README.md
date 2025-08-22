@@ -96,11 +96,11 @@ Read flow:
  +-----------+
  |   Query   | ----> [ QueryBus ] ----> [ QueryHandler ] ---> [ DTO ]
  +-----------+
-
+```
 
 ## Project Structure
 ```
-my_cqrs_project/
+command_event_query_project/
 ├── core/                  # Buses
 │   ├── command_bus.py
 │   ├── query_bus.py

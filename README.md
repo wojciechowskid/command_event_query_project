@@ -158,8 +158,8 @@ QUERY_HANDLERS = {
 EVENT_HANDLERS = {
     UserCreatedEvent: [
         log_user_created,
-        SendWelcomeEmailHandler()
-    ],
+        SendWelcomeEmailHandler(),
+    ]
 }
 ```
 
@@ -167,8 +167,10 @@ EVENT_HANDLERS = {
 # apps.py
 for cmd, handler in COMMAND_HANDLERS.items():
     command_bus.register_handler(cmd, handler)
+
 for qry, handler in QUERY_HANDLERS.items():
     query_bus.register_handler(qry, handler)
+
 for evt, handlers in EVENT_HANDLERS.items():
     for h in handlers:
         event_bus.register_handler(evt, h)
